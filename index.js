@@ -5,10 +5,12 @@ const consign = require('consign');
 
 consign()
     .then('./config/middlewares.js')
+    .then('./api')
+    .then('./config/routes.js')
     .into(app);
 
 app.db = db;
 
-app.listen(3333, () => {
+app.listen(3030, () => {
     console.log('Backend executed.');
 });
