@@ -5,9 +5,9 @@ module.exports = app => {
         const date = req.query.date ? req.query.date : moment().endOf('day').toDate();
 
         app.db('tasks')
-            .where({ user_id: req.user.id })
-            .where('estimate_at', '<=', date)
-            .orderBy('estimate_at')
+            .where({ userId: req.user.id })
+            .where('estimateAt', '<=', date)
+            .orderBy('estimateAt')
             .then(tasks => res.status(200).json(tasks))
             .catch(err => res.status(500).json(err));
     };
@@ -40,7 +40,7 @@ module.exports = app => {
             .catch(err => res.status(400).json(err));
     };
 
-    const updateTaksDoneAt = (req, res) => {
+    const updateTaksDoneAt = (req, res, doneAt) => {
         app.db('tasks')
             .where({ id: req.params.id, userId: req.user.id })
             .update({ doneAt })
@@ -55,10 +55,10 @@ module.exports = app => {
             .then(task => {
                 if (!task) {
                     const msg = `Task with id ${req.params.id} not found.`;
-                    return res.status(400).send(mgs);
+                    return res.status(400).send(msg);
                 };
 
-                const doneAt = task.doneAt ? null : new Date();
+                const doneAt = task.doneAt ? task.doneAt : new Date();
 
                 updateTaksDoneAt(req, res, doneAt);
             })

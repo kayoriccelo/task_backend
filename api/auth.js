@@ -10,7 +10,7 @@ module.exports = app => {
 
         const user = await app.db('users')
             .where({ email: req.body.email })
-            .first()
+            .first();
 
         if (user) {
             bcrypt.compare(req.body.password, user.password, (err, isMatch) => {
@@ -26,7 +26,7 @@ module.exports = app => {
                 });
             });
         } else {
-            return res.status(400).send('Email or password not invalid;')
+            return res.status(400).send('Email or password not invalid;');
         };
     };
 
