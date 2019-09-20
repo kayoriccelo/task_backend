@@ -15,7 +15,7 @@
        psql
        CREATE DATABASE tasks;
  - ###### Connecting database and show table names
-       \c supply
+       \c tasks
        \dt
        
  ### Project
