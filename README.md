@@ -22,6 +22,7 @@
  - ###### Installation
        sudo apt install npm
        sudo npm install
+       sudo npm install knex -g
  - ###### knex - performing migrations
        - run migrations
            sudo knex migrate:latest
